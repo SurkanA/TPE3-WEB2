@@ -1,9 +1,8 @@
 <?php
 require_once('model.php');
 
-class UsuarioModel extends Model
+class UsuarioApiModel extends Model
 {
-
     //Función que pide a la DB un usuario a partir de un user
     public function getUsuario($user)
     {
