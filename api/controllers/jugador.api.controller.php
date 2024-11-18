@@ -33,6 +33,70 @@ class JugadorApiController
         $jugadores = $this->model->getJugadoresPaginado($limite);
         $this->view->response($jugadores, 200);
     }
+    public function obtenerJugadoresOrdenado($req)
+    {
+        $categoria = $req[':CATEGORIA'];
+        $orden = $req[':ORDEN'];
+        if ($orden == 'ascendente') {
+            $orden = 'ASC';
+        } else if ($orden == 'descendente') {
+            $orden = 'DESC';
+        }
+
+        switch ($categoria) {
+            case 'nombre':
+                $categoria = 'nombre_jugador';
+                break;
+            case 'equipo':
+                $categoria = 'nombre_equipo';
+                break;
+            case 'id':
+                $categoria = 'id_jugador';
+                break;
+            case 'edad':
+                $categoria = 'edad';
+                break;
+            case 'posicion':
+                $categoria = 'posicion';
+                break;
+            case 'imagen':
+                $categoria = 'imagen_url';
+            default:
+                break;
+        }
+        $jugadores = $this->model->getJugadoresOrdenado($categoria, $orden);
+        $this->view->response($jugadores, 200);
+    }
+    public function obtenerJugadoresFiltro($req)
+    {
+        $filtro = $req[':FILTRO'];
+        $valor = $req[':VALOR'];
+        switch ($filtro) {
+            case 'nombre':
+                $filtro = 'nombre_jugador';
+                $valor = str_replace('', '', $valor);
+                break;
+            case 'equipo':
+                $filtro = 'nombre_equipo';
+                $valor = str_replace('', '', $valor);
+                break;
+            case 'id':
+                $filtro = 'id_jugador';
+                break;
+            case 'edad':
+                $filtro = 'edad';
+                break;
+            case 'posicion':
+                $filtro = 'posicion';
+                break;
+            case 'imagen':
+                $filtro = 'imagen_url';
+            default:
+                break;
+        }
+        $jugadores = $this->model->getJugadoresFiltro($filtro, $valor);
+        $this->view->response($jugadores, 200);
+    }
 
     public function obtenerJugador($req)
     {

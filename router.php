@@ -12,13 +12,15 @@ $router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);
 
 // Jugadores
 $router->addRoute('jugadores', 'GET', 'JugadorApiController', "obtenerJugadores");
-$router->addRoute('jugadores/:CANTIDAD', 'GET', 'JugadorApiController', "obtenerJugadoresPaginado");
+$router->addRoute('jugadores/paginar/:CANTIDAD', 'GET', 'JugadorApiController', "obtenerJugadoresPaginado");
+$router->addRoute('jugadores/filtrar/:FILTRO/:VALOR', 'GET', 'JugadorApiController', "obtenerJugadoresFiltro");
+$router->addRoute('jugadores/ordenar/:CATEGORIA/:ORDEN', 'GET', 'JugadorApiController', "obtenerJugadoresOrdenado");
 $router->addRoute('jugador/:EQUIPO/:ID', 'GET', 'JugadorApiController', "obtenerJugador");
 $router->addRoute('jugador/:EQUIPO/:ID', 'PUT', 'JugadorApiController', "actualizarJugador");
 $router->addRoute('jugador/:EQUIPO/:ID', 'DELETE', 'JugadorApiController', "borrarJugador");
 $router->addRoute('jugador', 'POST', 'JugadorApiController', "crearJugador");
 
-//equipos
+// Equipos
 $router->addRoute('equipo', 'GET', 'EquipoApiController', 'obtenerEquipos');
 $router->addRoute('equipo/:id', 'GET', 'EquipoApiController', "obtenerEquipo");
 $router->addRoute('equipo', 'POST', 'EquipoApiController', "crearEquipo");

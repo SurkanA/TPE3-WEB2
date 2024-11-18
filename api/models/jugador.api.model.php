@@ -27,6 +27,35 @@ class JugadorApiModel extends Model
         return $jugadores;
     }
 
+    public function getJugadoresOrdenado($categoria, $orden)
+    {
+        $pDO = $this->createConnection();
+
+        $sql = "SELECT * FROM `jugador` ORDER BY `jugador`.`$categoria` $orden";
+        $query = $pDO->prepare($sql);
+        $query->execute();
+
+        $jugadores = $query->fetchAll(PDO::FETCH_OBJ);
+        return $jugadores;
+    }
+
+    public function getJugadoresFiltro($filtro, $valor)
+    {
+        $pDO = $this->createConnection();
+        if ($filtro == 'nombre_equipo') {
+            $sql = 'SELECT * FROM jugador WHERE REPLACE(nombre_equipo, " ", "") = REPLACE(?, " ", "")';
+        } elseif ($filtro == 'nombre_jugador') {
+            $sql = 'SELECT * FROM jugador WHERE REPLACE(nombre_jugador, " ", "") = REPLACE(?, " ", "")';
+        } else {
+            $sql = "SELECT * FROM `jugador` WHERE $filtro = ?";
+        }
+        $query = $pDO->prepare($sql);
+        $query->execute([$valor]);
+
+        $jugadores = $query->fetchAll(PDO::FETCH_OBJ);
+        return $jugadores;
+    }
+
     public function getJugador($equipo, $id)
     {
         $pDO = $this->createConnection();
