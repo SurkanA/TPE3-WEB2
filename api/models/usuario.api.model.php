@@ -16,20 +16,4 @@ class UsuarioApiModel extends Model
 
         return $usuario;
     }
-
-    //Función para crear una nuevo usuario
-    public function createUser($user, $hash, $administrator)
-    {
-        $pDO = $this->createConnection();
-
-        $sql = 'INSERT INTO usuario (id_user, user, password, administrator) 
-                VALUES (NULL, ?, ?, ?)';
-
-        $query = $pDO->prepare($sql);
-        try {
-            $query->execute([$user, $hash, $administrator]);
-        } catch (\Throwable $th) {
-            return null;
-        }
-    }
 }

@@ -15,6 +15,18 @@ class JugadorApiModel extends Model
         return $jugadores;
     }
 
+    public function getJugadoresPaginado($limite)
+    {
+        $pDO = $this->createConnection();
+
+        $sql = "SELECT * FROM `jugador` ORDER BY `jugador`.`id_jugador` DESC LIMIT $limite";
+        $query = $pDO->prepare($sql);
+        $query->execute();
+
+        $jugadores = $query->fetchAll(PDO::FETCH_OBJ);
+        return $jugadores;
+    }
+
     public function getJugador($equipo, $id)
     {
         $pDO = $this->createConnection();
@@ -24,7 +36,7 @@ class JugadorApiModel extends Model
         $query = $pDO->prepare($sql);
         $query->execute([$equipo, $id]);
 
-        $jugadores = $query->fetchAll(PDO::FETCH_OBJ);
+        $jugadores = $query->fetch(PDO::FETCH_OBJ);
         return $jugadores;
     }
 
@@ -44,6 +56,15 @@ class JugadorApiModel extends Model
         VALUES (?, ?, ?, ?, ?, ?, ?)';
         $query = $pDO->prepare($sql);
         $query->execute([$nombre_jugador, $nombre_equipo, $id_jugador, $edad, $posicion, $biografia, $imagen_url]);
+    }
+
+    public function updatePlayer($nombre_jugador, $nombre_equipo, $id_jugador, $edad, $posicion, $biografia, $imagen_url, $equipo, $id)
+    {
+        $pDO = $this->createConnection();
+        $sql = 'UPDATE jugador SET nombre_jugador = ?, nombre_equipo = ?, id_jugador = ?, edad = ?, posicion = ?, biografia = ?, imagen_url = ? 
+        WHERE REPLACE(nombre_equipo, " ", "") = REPLACE(?, " ", "") AND id_jugador = ?';
+        $query = $pDO->prepare($sql);
+        $query->execute([$nombre_jugador, $nombre_equipo, $id_jugador, $edad, $posicion, $biografia, $imagen_url, $equipo, $id]);
     }
 
     public function teamExist($equipo)

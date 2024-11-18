@@ -10,10 +10,13 @@ $router = new Router();
 $router->route($_GET["resource"], $_SERVER['REQUEST_METHOD']);
 
 
+// Jugadores
 $router->addRoute('jugadores', 'GET', 'JugadorApiController', "obtenerJugadores");
-$router->addRoute('jugadores/:EQUIPO/:ID', 'GET', 'JugadorApiController', "obtenerJugador");
-$router->addRoute('jugadores/:EQUIPO/:ID', 'DELETE', 'JugadorApiController', "borrarJugador");
-$router->addRoute('jugadores', 'POST', 'JugadorApiController', "crearJugador");
+$router->addRoute('jugadores/:CANTIDAD', 'GET', 'JugadorApiController', "obtenerJugadoresPaginado");
+$router->addRoute('jugador/:EQUIPO/:ID', 'GET', 'JugadorApiController', "obtenerJugador");
+$router->addRoute('jugador/:EQUIPO/:ID', 'PUT', 'JugadorApiController', "actualizarJugador");
+$router->addRoute('jugador/:EQUIPO/:ID', 'DELETE', 'JugadorApiController', "borrarJugador");
+$router->addRoute('jugador', 'POST', 'JugadorApiController', "crearJugador");
 
 //equipos
 $router->addRoute('equipo', 'GET', 'EquipoApiController', 'obtenerEquipos');
