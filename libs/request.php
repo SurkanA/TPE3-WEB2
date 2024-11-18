@@ -1,7 +1,7 @@
 <?php
     class Request {
         public $body = null; # { nombre: 'Saludar', descripcion: 'Saludar a todos' }
-        public $params = null; # /api/tareas/:id
+        public $params = null; # /api/boleto/:id
         public $query = null; # ?soloFinalizadas=true
 
         public function __construct() {
