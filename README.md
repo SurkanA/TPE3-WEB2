@@ -61,12 +61,12 @@ Este proyecto proporciona una API para gestionar equipos de fútbol. A continuac
 
 ### 2. Obtener jugadores paginados
 - **Método:** GET
-- **URL:** `api/jugador/paginar/{cantidad}`
+- **URL:** `api/jugadores/paginar/{cantidad}`
 - **Descripción:** Obtiene jugadores paginados segun la cantidad asignada empezando por el ultimo hasta el primero.
 
 ### 3. Obtener jugadores filtrados
 - **Método:** GET
-- **URL:** `api/jugador/filtrar/{filtro}/{valor}`
+- **URL:** `api/jugadores/filtrar/{filtro}/{valor}`
 - **Descripción:** Obtiene jugadores que coinciden con un filtro específico (nombre, equipo, id, edad, posicion, imagen) y un valor específico.
 
 ### 4. Obtener jugadores ordenados
